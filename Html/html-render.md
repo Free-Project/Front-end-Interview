@@ -1,14 +1,8 @@
-## 浏览器渲染页面的一般过程
+## 浏览器渲染页面过程
 
-## 通俗解释：
-1. 浏览器解析html源码，然后创建一个 DOM树。并行请求 css/image/js在DOM树中，每一个HTML标签都有一个对应的节点，并且每一个文本也都会有一个对应的文本节点。DOM树的根节点就是 documentElement，对应的是html标签。
-2. 浏览器解析CSS代码，计算出最终的样式数据。构建CSSOM树。对CSS代码中非法的语法它会直接忽略掉。解析CSS的时候会按照如下顺序来定义优先级：浏览器默认设置 < 用户设置 < 外链样式 < 内联样式 < html中的style。
-3. DOM Tree + CSSOM --> 渲染树（rendering tree）。渲染树和DOM树有点像，但是有区别的。DOM树完全和html标签一一对应，但是渲染树会忽略掉不需要渲染的元素，比如head、display:none的元素等。而且一大段文本中的每一个行在渲染树中都是独立的一个节点。渲染树中的每一个节点都存储有对应的css属性。
-4.一旦渲染树创建好了，浏览器就可以根据渲染树直接把页面绘制到屏幕上。
 
 ## 概念解释
 
-- **关键渲染路径（Critical Rendering Path）**是指与当前用户操作有关的内容。例如用户在浏览器中打开一个页面，其中页面所显示的东西就是当前用户操作相关的内容，也就是浏览器从服务器那收到的HTML,CSS,JavaScript等相关资源，然后经过一系列处理后渲染出来的web页面。  
 - **DOM Tree**：浏览器将HTML解析成树形的数据结构。  
 - **CSS Rule Tree**：浏览器将CSS解析在树形的数据结构。  
 - **Render Tree**：DOM和CSSOM(CSS Object Model:CSS对象模型)合并后生成Render Tree。  
@@ -17,27 +11,21 @@
 - **reflow(回流)**：当浏览器发现某个部分发生了点变化影响了布局，需要倒回去重新渲染，称此为回退的过程，叫reflow.reflow会从`<html>`这个root frame开始递归往下，依次计算所有的结点几何尺寸和位置。feflow几乎是无法避免的。例如：树状目录的折叠，展开，实质上是元素的显示与隐藏等，都将引起浏览器的reflow，鼠标划过，点击，只要这些行为引起了页面上的某些元素的占位面积，定位方式，边距等属性的变化，都会引起它的内部，周围甚至整个页面的重新渲染。  
 - **repaint(重绘)**：改变某个元素的背景色，文字颜色，边框颜色等等不影响它周围或内部布局的属性时，屏幕的一部分要重画，但是元素的几何尺寸没有变。 
 
-
 注意点：
-1.display:none的节点不会被加入Render Tree,而visibility:hidden则会，所以如果某个节点最开始是不显示的，设为display:none是最好的
-2.display:none会触发reflow，而visibility:hidden只会触发repaint,因为位置没有发生变化.
-3.有些情况下，比如修改了元素的样式，浏览器不会立刻reflow和repaint一次，而是会把这样的操作积攒一批，然后做一次reflow，这又叫异步reflow或增量异步reflow,但是有些情况，如resize窗口，改变了页面默认的字体等，对于这些操作，浏览器会马上进行reflow
+1. display:none的节点不会被加入Render Tree,而visibility:hidden则会，所以如果某个节点最开始是不显示的，设为display:none是最好的
+2. display:none会触发reflow，而visibility:hidden只会触发repaint,因为位置没有发生变化.
+3. 有些情况下，比如修改了元素的样式，浏览器不会立刻reflow和repaint一次，而是会把这样的操作积攒一批，然后做一次reflow，这又叫异步reflow或增量异步reflow,但是有些情况，如resize窗口，改变了页面默认的字体等，对于这些操作，浏览器会马上进行reflow
 
 ## 主流程
 渲染引擎首先通过网络获得所请求文档的内容，通常以8K分块的方式完成。基本流程为：
 解析HTML以构建DOM树 -> 解析CSS构建CSSOM -> 将DOM树与CSSOM树合并，构建Render树 -> 布局render树 -> 绘制render树
 
-1.浏览器会将HTML解析成一个DOM树，DOM树构建过程是一个深度遍历过程，当前节点的所有子节点都构建好后才会去构建当前节点的下一个兄弟节点.
-2.将CSS解析成CSS Rule Tree.
-3.根据DOM和CSSOM来构造Render Tree,Render tree不等于DOM Tree,因为像Header或display:none的东西没有必要放在渲染树中.
-4.有了Render Tree,浏览器已经能知道网页中有哪些节点，各个节点的CSS定义以及他们的从属关系，下一步操作称之为layout，顾名思义就是计算出每个节点在屏幕中的位置.
-5.下一步就是绘制，即遍历render树，并使用UI后端层绘制每个节点。
-注意：上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树。它是解析完一部分内容就显示一部分内容，同时，可能还在通过网络下载其余内容.
+1. 构建DOM树：当浏览器客户端从服务器那接受到HTML文档后，就会遍历文档节点然后生成DOM树，DOM树结构和HTML标签一一对应。
+2. CSS解析：处理CSS标记，构成层叠样式表模型CSSOM(CSS Object Model)，解析成CSS Rule Tree。
+3. 渲染树：根据DOM和CSSOM来构造Render Tree，Render tree不等于DOM Tree,因为像Header或display:none的东西没有必要放在渲染树中。
+4. 布局：render layout。
+5. 绘制：将渲染树的各个节点绘制到页面上。
+6. 
+注意：上述这个过程是逐步完成的，为了更好的用户体验，渲染引擎将会尽可能早的将内容呈现到屏幕上，并不会等到所有的html都解析完成之后再去构建和布局render树。它是解析完一部分内容就显示一部分内容，同时，可能还在通过网络下载其余内容。
 
-## 而浏览器渲染的过程主要包括以下五步：
 
-1. 浏览器将获取的HTML文档并解析成DOM树。
-2. 处理CSS标记，构成层叠样式表模型CSSOM(CSS Object Model)。
-3. 将DOM和CSSOM合并为渲染树(rendering tree)将会被创建，代表一系列将被渲染的对象。
-3. 渲染树的每个元素包含的内容都是计算过的，它被称之为布局layout。浏览器使用一种流式处理的方法，只需要一次pass绘制操作就可以布局所有的元素。
-5. 将渲染树的各个节点绘制到屏幕上，这一步被称为绘制painting.
