@@ -242,3 +242,8 @@ function permute(s) {
   }
 }
 ```
+
+等多排列算法参考：
+https://www.cnblogs.com/AlbertP/p/10847627.html
+https://zhuanlan.zhihu.com/p/75678113
+https://www.cnblogs.com/wteam-xq/p/4752610.html
