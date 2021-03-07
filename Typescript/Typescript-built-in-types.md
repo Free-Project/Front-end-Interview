@@ -128,6 +128,8 @@ type Exclude<T, U> = T extends U ? never: T
 type result = Exclude<"a" | "b" | "c" | "d", "a" | "c" | "f"> ;
 // 结果: "b" | "d"
 // 在这个例子中，因为用到了Exclude这个条件类型，会尝试寻找在T类型中有但在U类型中没有的成员，最后将获取到的Union类型 "b" | "d"
+![图片alt](https://github.com/kothing/Front-end-Interview/blob/main/Img/Exclude.png 'Exclude')  
+
 
 //示例二：
 type TestType =  {name: string} | {name: string, age: number} | "a" | "c" | "d"
