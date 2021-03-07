@@ -117,9 +117,8 @@ type TestType= Record<'get' | 'post', {'url': string, 'type': string}>
  
 
 ## 六、`Exclude<T, U>`： 从T中剔除U类型
-用于排除掉我们需要的属性  
+用于移除 T 中的 U 属性 
 源码实现：用条件类型实现
-
 ```
 type Exclude<T, U> = T extends U ? never: T
 ```
