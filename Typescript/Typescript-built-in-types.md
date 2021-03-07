@@ -125,7 +125,7 @@ type Exclude<T, U> = T extends U ? never: T
 
 ```
 //示例一：
-type result = Exclude<"a" | "b" | "c" | "d", "a", "c", "f"> ;
+type result = Exclude<"a" | "b" | "c" | "d", "a" | "c" | "f"> ;
 // 结果: "b" | "d"
 // 在这个例子中，因为用到了Exclude这个条件类型，会尝试寻找在T类型中有但在U类型中没有的成员，最后将获取到的Union类型 "b" | "d"
 
@@ -136,21 +136,22 @@ type result = Exclude<TestType, {name: string} | "c"> ;
 ```
  
 
-## 七、`Extract<T, U>`：Exclude 的反操作，取 T，U 两者的交集属性
+## 七、`Extract<T, U>`：Exclude 的反操作，（取 T U 两者的交集属性）
 源码实现: 条件类型实现
 ```
 type Extract<T, U> = T extends U ? T: never
 ```
 用法示例：
 ```
-type resTR = Extract<"a" | "b" | "c", "b" | "c">; //"b" | "c"
+type result = Extract<"a" | "b" | "c" | "d", "a" | "c" | "f"> ;
+结果："a" | "c"
 ```
  
 
 ## 八、`Omit<T, K>`：从类型 T 中 除去指定属性类型 K
 源码实现: 利用`pick` + `Exclude` 结合实现
 ```
-type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
+type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>
 ```
 用法示例: 
 ```
