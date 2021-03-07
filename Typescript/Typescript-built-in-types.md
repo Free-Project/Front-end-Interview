@@ -116,8 +116,7 @@ type TestType= Record<'get' | 'post', {'url': string, 'type': string}>
 ```
  
 
-## 六、`Exclude<T, U>`： 从T中剔除U类型
-用于移除 T 中的 U 属性 
+## 六、`Exclude<T, U>`： 剔除 T 中的 U 属性 
 源码实现：用条件类型实现
 ```
 type Exclude<T, U> = T extends U ? never: T
@@ -136,7 +135,7 @@ type resType2 = Exclude<TestType, {name: string} | "c"> ;
 ```
  
 
-## 七、`Extract<T, U>`：提取T中可以赋值给U的类型（提取 T 与U 的交集）
+## 七、`Extract<T, U>`：Exclude 的反操作，取 T，U 两者的交集属性
 源码实现: 条件类型实现
 ```
 type Extract<T, U> = T extends U ? T: never
@@ -147,7 +146,7 @@ type resTR = Extract<"a" | "b" | "c", "b" | "c">; //"b" | "c"
 ```
  
 
-## 八、`Omit<T, K>`：从类型T 中 除去指定属性类型K
+## 八、`Omit<T, K>`：从类型 T 中 除去指定属性类型K
 源码实现: 利用`pick` + `Exclude` 结合实现
 ```
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
