@@ -114,7 +114,7 @@ type IType= Record<"get"|"post",{'url':string,'type':string}>
 源码实现：用条件类型实现
 
 ```
-type Exclude<T,U> = T  extends U?never:T
+type Exclude<T,U> = T extends U?never: T
 ```
 用法示例：
 
