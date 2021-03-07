@@ -116,7 +116,7 @@ type TestType= Record<'get' | 'post', {'url': string, 'type': string}>
 ```
  
 
-## 六、`Exclude<T, U>`： 剔除 T 中的 U 属性 
+## 六、`Exclude<T, U>`： 用于从类型T中去除不在U类型中的成员，（T中有，U中没有）
 源码实现：用条件类型实现
 ```
 type Exclude<T, U> = T extends U ? never: T
@@ -125,12 +125,13 @@ type Exclude<T, U> = T extends U ? never: T
 
 ```
 //示例一：
-type resType1 = Exclude<"a" | "c" | "d", "c"> ;
-// 结果: "a" | "d"
+type result = Exclude<"a" | "b" | "c" | "d", "a", "c", "f"> ;
+// 结果: "b" | "d"
+// 在这个例子中，因为用到了Exclude这个条件类型，会尝试寻找在T类型中有但在U类型中没有的成员，最后将获取到的Union类型 "b" | "d"
 
 //示例二：
 type TestType =  {name: string} | {name: string, age: number} | "a" | "c" | "d"
-type resType2 = Exclude<TestType, {name: string} | "c"> ;
+type result = Exclude<TestType, {name: string} | "c"> ;
 //结果: "a" | "d"
 ```
  
