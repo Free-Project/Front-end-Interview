@@ -116,68 +116,65 @@ type TestType= Record<'get' | 'post', {'url': string, 'type': string}>
 ```
  
 
-## 六、`Exclude<T,U>`： 从T中剔除U类型)
+## 六、`Exclude<T, U>`： 从T中剔除U类型
 用于排除掉我们需要的属性  
 源码实现：用条件类型实现
 
 ```
-type Exclude<T,U> = T extends U?never: T
+type Exclude<T, U> = T extends U ? never: T
 ```
 用法示例：
 
 ```
 //示例一：
-type resType1 = T_Exclude<"a" | "c" | "d","c"> ;// "a"|"d"
+type resType1 = Exclude<"a" | "c" | "d", "c"> ;
+// 结果: "a" | "d"
 
 //示例二：
-type Itype =  {name:string} | {name:string,age:number} | "a" | "c" | "d"
-type resType1 = T_Exclude<Itype, {name:string} | "c"> ;
+type TestType =  {name: string} | {name: string, age: number} | "a" | "c" | "d"
+type resType2 = Exclude<TestType, {name: string} | "c"> ;
 //结果: "a" | "d"
 ```
  
 
-## 七、`Extract<T,U>`：提取T中可以赋值给U的类型（提取 T 与U 的交集）
+## 七、`Extract<T, U>`：提取T中可以赋值给U的类型（提取 T 与U 的交集）
 源码实现: 条件类型实现
 ```
-type Extract<T,U> = T extends U ? T:never
+type Extract<T, U> = T extends U ? T: never
 ```
 用法示例：
 ```
-type resTR = TExtract<"a"|"b"|"c","b"|"c">;//"b"|"c"
+type resTR = Extract<"a" | "b" | "c", "b" | "c">; //"b" | "c"
 ```
  
 
-## 八、`Omit<T,K>`：从类型T 中 除去指定属性类型K
+## 八、`Omit<T, K>`：从类型T 中 除去指定属性类型K
 源码实现: 利用`pick` + `Exclude` 结合实现
 ```
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
 ```
 用法示例: 
 ```
-type resType= Omit<{id:number,name:string,age:number},"age"|"name">;// "{id:number}"
+type resType= Omit<{id: number, name: string, age: number}, "age" | "name">; // "{id: number}"
 ```
 
 ## 九、`NonNullable<T>`：从T 中剔除null ，underfined 类型
 源码实现：
 ```
-type NonNullable<T> = T extends null |undefined?never: T
+type NonNullable<T> = T extends null | undefined?never: T
 ```
 用法示例：
 ```
-type resType = NonNullable<string|number|null|undefined> // string|number
+type resType = NonNullable<string | number | null | undefined> // string | number
 ```
 
 ## 十、`inter` 关键词
 1. typescript2.8 新出的语法
-
 2. 在条件语句中作为待推断的类型变量，推断返回值类型
-
 3. 可以将元组变成联合类型
-
 4. 理解好这个用法， Parameters, ReturnType 等内置类型的实现 都用到这个
 
 用法示例：
-
 ```
 示例1：
 type Foo<T> = T extends { a: infer U; b: infer U } ? U : never;
@@ -194,25 +191,25 @@ type T4 = Tg<I3>;// T4类型为： string|number
 ## 十一、`Parameters<T>`：获取函数参数类型
 源码实现:
 ```
-type Parameters<T extends (...args:any)=>any> = T extends (...args: infer P) => any ? P:never
+type Parameters<T extends (...args:any) => any> = T extends (...args: infer P) => any ? P:never
  ```
 用法示例:
 ```
 interface Ifn {
-   (name:string,age:number):void
+   (name: string,age: number): void
 }
-type getParamsType = TParameters<typeof fn> //返回的是元组：[string,number]
+type getParamsType = TParameters<typeof fn> //返回的是元组：[string, number]
 ```
  
 
 ## 十二、`ReturnType`：获取函数返回值类型
 源码实现
 ```
-type ReturnType<T extends (...args:any)=>any> = T extends (...args:any)=>infer P?P:never
+type ReturnType<T extends (...args:any) => any> = T extends (...args: any)=>infer P ? P: never
 ```
 用法示例：
 ```
- function fn(name:string):string|number{
+ function fn(name:string): string | number{
      return name
  }
  type resType= ReturnType<typeof fn>;//string|number
@@ -221,15 +218,15 @@ type ReturnType<T extends (...args:any)=>any> = T extends (...args:any)=>infer P
 ## 十三、`ConstructorParamters`：获取构造函数的参数类型
 源码实现：
 ```
-type ConstructorParamters<T extends new (...args:any)=>any> = T extends new (...args:infer P)=>any ?P:never
+type ConstructorParamters<T extends new (...args:any) => any> = T extends new (...args: infer P) => any ? P: never
 ```
 用法示例：
 ```
  // 示例
- class Y{
-     constructor(name:string,age:number){}
+ class Y {
+     constructor(name: string, age: number){}
  }
- type resType = ConstructorParamters<typeof Y> //[string,number]
+ type resType = ConstructorParamters<typeof Y> //[string, number]
  ```
 
 ## 十四、`InstanceType`：获取构造函数类型的实例类型(获取一个类的返回类型)
@@ -239,13 +236,13 @@ type ConstructorParamters<T extends new (...args:any)=>any> = T extends new (...
 ```
 ```
 class Y{
-    ID:number|undefined
+    ID: number | undefined
     GET(){}
-    constructor(name:string,age:number){}
+    constructor(name: string, age: number){}
 }
 type resType= InstanceType<typeof Y>
-let obj:resType= {
-    ID:1,
+let obj: resType= {
+    ID: 1,
     GET(){}
 }
 ```
