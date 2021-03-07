@@ -20,15 +20,15 @@ type Required<T> = {
 
 ```
 type User = {
-    name?:string
-    password?:string
-    id?:number
+    name?: string
+    password?: string
+    id?: number
 }
 
-let userRe:Required<User> = {
-    name:"mk",
-    password:"123456",
-    id:1
+let reqUser: Required<User> = {
+    name: "Tom",
+    password: "123456",
+    id: 1
 }
 ```
  
@@ -36,19 +36,19 @@ let userRe:Required<User> = {
 ## 二、`Partial<T>`：将所有类型转为可选类型
 源码实现：把问号加上
 ```
-type TPartial<T> = {
-    [k in keyof T]?:T[k]
+type Partial<T> = {
+    [k in keyof T]?: T[k]
 }
 ```
 用法示例
 
 ```
-type IUser = {
-    name:string
-    password:string
-    id:number
+type User = {
+    name: string
+    password: string
+    id: number
 }
-let user:Partial<IUser> = {} ;//属性类型为可选，所以不写也不会报错
+let user: Partial<User> = {} ;//属性类型为可选，所以不写也不会报错
 ```
  
 
@@ -62,12 +62,14 @@ type Readonly<T> = {
 用法示例：
 
 ```
-type IUser = {
-    name:string
+type User = {
+    name: string
 }
 
-let userRd:Readonly<IUser> = { name:"12345" }
-userRd.name = "mike" ;//报错，无法赋值，只读属性，只能初始化赋值
+let readOnlyUser: Readonly<User> = {
+  name: "12345"
+}
+readOnlyUser.name = "mike" ;//报错，无法赋值，只读属性，只能初始化赋值
 ```
  
 
@@ -81,17 +83,22 @@ type Pick<T, K extends keyof T> = {
 用法示例：
 
 ```
-type Itype  = {"LEFT":string,'TOP':string,"RIGHT":string,"BOTTOM":string}
-type resType = Pick<Itype,"LEFT"|"TOP">
-//resType 结果是  ： { "LEFT":string:"TOP":string}
+type Direction  = {
+  "LEFT": string,
+  'TOP': string,
+  "RIGHT": string,
+  "BOTTOM": string
+}
+type resDirection = Pick<Direction, "LEFT" | "TOP">
+//resType 结果是： { "LEFT": string, "TOP": string}
 let res: resType = {
-   LEFT:"left",
-   TOP:"top"
+   LEFT: "left",
+   TOP: "top"
 }
 ```
  
 
-## 五、`Record`： 标记 K 中的属性为T类型; key=>value 
+## 五、`Record`： 标记 K 中的属性为 T 类型; key=>value 
 源码实现:
 ```
 type Record<K extends keyof any, T> = {
@@ -99,18 +106,18 @@ type Record<K extends keyof any, T> = {
 };
 ```
 用法示例:
-
 ```
-type IType= Record<"get"|"post",{'url':string,'type':string}>
+type TestType= Record<'get' | 'post', {'url': string, 'type': string}>
 //结果：
 {
-   "get":{'url':string,'type':string},
-   "post":{'url':string,'type':string}
+   'get': {'url': string, 'type': string},
+   'post': {'url': string, 'type': string}
 }
 ```
  
 
-## 六、`Exclude<T,U>`： 从T中剔除可以赋值给U的类型 (返回T 中除了U 的类型)
+## 六、`Exclude<T,U>`： 从T中剔除U类型)
+用于排除掉我们需要的属性  
 源码实现：用条件类型实现
 
 ```
@@ -120,11 +127,11 @@ type Exclude<T,U> = T extends U?never: T
 
 ```
 //示例一：
-type resType1 = TExclude<"a" | "c" | "d","c"> ;// "a"|"d"
+type resType1 = T_Exclude<"a" | "c" | "d","c"> ;// "a"|"d"
 
 //示例二：
 type Itype =  {name:string} | {name:string,age:number} | "a" | "c" | "d"
-type resType1 = TExclude<Itype ,{name:string}|"c"> ;
+type resType1 = T_Exclude<Itype, {name:string} | "c"> ;
 //结果: "a" | "d"
 ```
  
