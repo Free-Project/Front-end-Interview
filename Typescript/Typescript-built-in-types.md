@@ -8,7 +8,7 @@ typescript 提供了很多实用内置的类型，大家安装typescript 的时�
 - `ReturnType<T>`：获取函数返回值类型。
 - `InstanceType<T>`：获取构造函数类型的实例类型。
 
-## 一、Required<T> ：将所有属性类型转为必选属性类型
+## 一、`Required<T>` ：将所有属性类型转为必选属性类型
   
   源码实现：把问号减去
 ```
@@ -52,7 +52,7 @@ let user:Partial<IUser> = {} ;//属性类型为可选，所以不写也不会报
 ```
  
 
-## 三、Readony： 将所有属性类型转为只读属性选项类型
+## 三、`Readony`： 将所有属性类型转为只读属性选项类型
 源码实现: 在属性key 前面加readonly 关键词
 ```
 type Readonly<T> = {
@@ -71,7 +71,7 @@ userRd.name = "mike" ;//报错，无法赋值，只读属性，只能初始化�
 ```
  
 
-## 四、Pick：从 T 中筛选出 K (大类型中挑选小类型)
+## 四、`Pick`：从 T 中筛选出 K (大类型中挑选小类型)
 源码实现：
 ```
 type Pick<T, K extends keyof T> = {
@@ -91,7 +91,7 @@ let res: resType = {
 ```
  
 
-## 五、Record： 标记 K 中的属性为T类型; key=>value 
+## 五、`Record`： 标记 K 中的属性为T类型; key=>value 
 源码实现:
 ```
 type Record<K extends keyof any, T> = {
@@ -110,7 +110,7 @@ type IType= Record<"get"|"post",{'url':string,'type':string}>
 ```
  
 
-## 六、Exclude<T,U>： 从T中剔除可以赋值给U的类型 (返回T 中除了U 的类型)
+## 六、`Exclude<T,U>`： 从T中剔除可以赋值给U的类型 (返回T 中除了U 的类型)
 源码实现：用条件类型实现
 
 ```
@@ -129,7 +129,7 @@ type resType1 = TExclude<Itype ,{name:string}|"c"> ;
 ```
  
 
-## 七、Extract<T,U>：提取T中可以赋值给U的类型（提取 T 与U 的交集）
+## 七、`Extract<T,U>`：提取T中可以赋值给U的类型（提取 T 与U 的交集）
 源码实现: 条件类型实现
 ```
 type Extract<T,U> = T extends U ? T:never
@@ -140,7 +140,7 @@ type resTR = TExtract<"a"|"b"|"c","b"|"c">;//"b"|"c"
 ```
  
 
-## 八、Omit<T,K>：从类型T 中 除去指定属性类型K
+## 八、`Omit<T,K>`：从类型T 中 除去指定属性类型K
 源码实现: 利用`pick` + `Exclude` 结合实现
 ```
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
@@ -150,7 +150,7 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
 type resType= Omit<{id:number,name:string,age:number},"age"|"name">;// "{id:number}"
 ```
 
-## 九、NonNullable<T>：从T 中剔除null ，underfined 类型
+## 九、`NonNullable<T>`：从T 中剔除null ，underfined 类型
 源码实现：
 ```
 type NonNullable<T> = T extends null |undefined?never: T
@@ -160,7 +160,7 @@ type NonNullable<T> = T extends null |undefined?never: T
 type resType = NonNullable<string|number|null|undefined> // string|number
 ```
 
-## 十、inter 关键词
+## 十、`inter` 关键词
 1. typescript2.8 新出的语法
 
 2. 在条件语句中作为待推断的类型变量，推断返回值类型
@@ -184,7 +184,7 @@ type Tg<T> = T extends (infer R)[] ? R : never
 type T4 = Tg<I3>;// T4类型为： string|number
 ```
  
-## 十一、Parameters<T>：获取函数参数类型
+## 十一、`Parameters<T>`：获取函数参数类型
 源码实现:
 ```
 type Parameters<T extends (...args:any)=>any> = T extends (...args: infer P) => any ? P:never
@@ -198,7 +198,7 @@ type getParamsType = TParameters<typeof fn> //返回的是元组：[string,numbe
 ```
  
 
-## 十二、ReturnType：获取函数返回值类型
+## 十二、`ReturnType`：获取函数返回值类型
 源码实现
 ```
 type ReturnType<T extends (...args:any)=>any> = T extends (...args:any)=>infer P?P:never
@@ -211,7 +211,7 @@ type ReturnType<T extends (...args:any)=>any> = T extends (...args:any)=>infer P
  type resType= ReturnType<typeof fn>;//string|number
  ```
 
-## 十三、ConstructorParamters：获取构造函数的参数类型
+## 十三、`ConstructorParamters`：获取构造函数的参数类型
 源码实现：
 ```
 type ConstructorParamters<T extends new (...args:any)=>any> = T extends new (...args:infer P)=>any ?P:never
@@ -225,7 +225,7 @@ type ConstructorParamters<T extends new (...args:any)=>any> = T extends new (...
  type resType = ConstructorParamters<typeof Y> //[string,number]
  ```
 
-## 十四、InstanceType：获取构造函数类型的实例类型(获取一个类的返回类型)
+## 十四、`InstanceType`：获取构造函数类型的实例类型(获取一个类的返回类型)
 源码实现：
 ```
  type InstanceType<T extends new (...args: any) => any> = T extends new (...args: any) => infer R ? R : any;
