@@ -146,7 +146,7 @@ type resTR = Extract<"a" | "b" | "c", "b" | "c">; //"b" | "c"
 ```
  
 
-## 八、`Omit<T, K>`：从类型 T 中 除去指定属性类型K
+## 八、`Omit<T, K>`：从类型 T 中 除去指定属性类型 K
 源码实现: 利用`pick` + `Exclude` 结合实现
 ```
 type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
@@ -156,7 +156,7 @@ type Omit<T, K extends keyof any> = Pick<T, Exclude<keyof T, K>>
 type resType= Omit<{id: number, name: string, age: number}, "age" | "name">; // "{id: number}"
 ```
 
-## 九、`NonNullable<T>`：从T 中剔除null ，underfined 类型
+## 九、`NonNullable<T>`：从 T 中剔除 null，underfined 类型
 源码实现：
 ```
 type NonNullable<T> = T extends null | undefined?never: T
@@ -203,14 +203,14 @@ type getParamsType = TParameters<typeof fn> //返回的是元组：[string, numb
 ## 十二、`ReturnType`：获取函数返回值类型
 源码实现
 ```
-type ReturnType<T extends (...args:any) => any> = T extends (...args: any)=>infer P ? P: never
+type ReturnType<T extends (...args: any) => any> = T extends (...args: any)=>infer P ? P: never
 ```
 用法示例：
 ```
- function fn(name:string): string | number{
+ function fn(name: string): string | number{
      return name
  }
- type resType= ReturnType<typeof fn>;//string|number
+ type resType= ReturnType<typeof fn>;//string | number
  ```
 
 ## 十三、`ConstructorParamters`：获取构造函数的参数类型
