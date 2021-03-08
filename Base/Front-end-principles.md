@@ -16,7 +16,7 @@ Target就是被观察对象Subject，listener就是观察者Observer。
 - subscribe(): 接收一个观察者observer对象，使其订阅自己
 - unsubscribe(): 接收一个观察者observer对象，使其取消订阅自己
 - fire(): 触发事件，通知到所有观察者
-- 
+
 用JavaScript手动实现观察者模式：  
 ```
 // 被观察者
