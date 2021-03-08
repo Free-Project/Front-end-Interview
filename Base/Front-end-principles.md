@@ -204,6 +204,8 @@ Server Side Render：服务端渲染
 更多https://www.jianshu.com/p/b8cfa496b7ec
 
 ### 3、RESTful常用的Method
+http://www.ruanyifeng.com/blog/2011/09/restful.html
+
 ### 4、base64为什么能提升性能，缺点
 ### 5、介绍webp这个图片文件格式
 ### 6、介绍DNS解析
