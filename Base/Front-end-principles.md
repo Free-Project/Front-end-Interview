@@ -2,15 +2,86 @@
 
 ## 一、原理篇
 
-1. 介绍观察者模式
-2. 介绍中介者模式
-3. 观察者和订阅-发布的区别，各自用在哪里
-4. 介绍事件代理以及优缺点
-5. tcp3次握手
-6. tcp属于哪一层（1 物理层 -> 2 数据链路层 -> 3 网络层(ip)-> 4 传输层(tcp) -> 5 应用层(http)）
-7. 前端开发中用到哪些设计模式
-8. 介绍下数字签名的原理
-8. Promise.all实现原理
+1. **介绍观察者模式**
+观察者模式又称发布订阅模式（Publish/Subscribe Pattern），是我们经常接触到的设计模式，日常生活中的应用也比比皆是，比如你订阅了某个博主的频道，当有内容更新时会收到推送；又比如JavaScript中的事件订阅响应机制。观察者模式的思想用一句话描述就是：被观察对象（subject）维护一组观察者（observer），当被观察对象状态改变时，通过调用观察者的某个方法将这些变化通知到观察者。  
+
+比如给DOM元素绑定事件的 `addEventListener()` 方法：
+```
+target.addEventListener(type, listener [, options]);
+```
+Target就是被观察对象Subject，listener就是观察者Observer。   
+
+观察者模式中Subject对象一般需要实现以下API：
+
+- subscribe(): 接收一个观察者observer对象，使其订阅自己
+- unsubscribe(): 接收一个观察者observer对象，使其取消订阅自己
+- fire(): 触发事件，通知到所有观察者
+- 
+用JavaScript手动实现观察者模式：  
+```
+// 被观察者
+function Subject() {
+  this.observers = [];
+}
+
+Subject.prototype = {
+  // 订阅
+  subscribe: function (observer) {
+    this.observers.push(observer);
+  },
+  // 取消订阅
+  unsubscribe: function (observerToRemove) {
+    this.observers = this.observers.filter(observer => {
+      return observer !== observerToRemove;
+    })
+  },
+  // 事件触发
+  fire: function () {
+    this.observers.forEach(observer => {
+      observer.call();
+    });
+  }
+}
+```
+验证一下订阅是否成功：
+```
+const subject = new Subject();
+
+function observer1() {
+  console.log('Observer 1 Firing!');
+}
+
+function observer2() {
+  console.log('Observer 2 Firing!');
+}
+
+subject.subscribe(observer1);
+subject.subscribe(observer2);
+subject.fire();
+```
+输出：
+```
+Observer 1 Firing! 
+Observer 2 Firing!
+```
+验证一下取消订阅是否成功：
+```
+subject.unsubscribe(observer2);
+subject.fire();
+```
+输出：
+```
+Observer 1 Firing!
+```
+
+2. **介绍中介者模式**
+3. **观察者和订阅-发布的区别，各自用在哪里**
+4. **介绍事件代理以及优缺点**
+5. **TCP的3次握手**
+6. **TCP属于哪一层（1 物理层 -> 2 数据链路层 -> 3 网络层(ip)-> 4 传输层(tcp) -> 5 应用层(http)）**
+7. **前端开发中用到哪些设计模式**
+8. **介绍下数字签名的原理**
+9. **Promise.all实现原理**
 
 
 ## 二、算法/编程篇
