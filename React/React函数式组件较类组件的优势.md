@@ -6,17 +6,20 @@ Hook 的设计在某些方面更加高效：
 
 - Hook 避免了 class 需要的额外开支，像是创建类实例和在构造函数中绑定事件处理器的成本。
 - 符合语言习惯的代码在使用 Hook 时不需要很深的组件树嵌套。这个现象在使用高阶组件、render props、和 context 的代码库中非常普遍。组件树小了，React 的工作量也随之减少。
-传统上认为，在 React 中使用内联函数对性能的影响，与每次渲染都传递新的回调会如何破坏子组件的 shouldComponentUpdate 优化有关。Hook 从三个方面解决了这个问题。
 
-- useCallback Hook 允许你在重新渲染之间保持对相同的回调引用以使得 shouldComponentUpdate 继续工作：
+
+传统上认为，在 React 中使用内联函数对性能的影响，与每次渲染都传递新的回调会如何破坏子组件的 shouldComponentUpdate 优化有关。  
+Hook 从三个方面解决了这个问题。
+
+1. useCallback Hook 允许你在重新渲染之间保持对相同的回调引用以使得 shouldComponentUpdate 继续工作：
 ```
 // 除非 `a` 或 `b` 改变，否则不会变
 const memoizedCallback = useCallback(() => {
   doSomething(a, b);
 }, [a, b]);
 ```
-- useMemo Hook 使得控制具体子节点何时更新变得更容易，减少了对纯组件的需要。
-- 最后，useReducer Hook 减少了对深层传递回调的依赖，正如下面解释的那样。
+2. useMemo Hook 使得控制具体子节点何时更新变得更容易，减少了对纯组件的需要。
+3. 最后，useReducer Hook 减少了对深层传递回调的依赖，正如下面解释的那样。
 
 
 -------------------------------------------------------------------
