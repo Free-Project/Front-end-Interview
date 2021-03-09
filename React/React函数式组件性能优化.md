@@ -7,5 +7,5 @@ react hooks的出现使得函数组件拥有类组件的能力，且函数组件
 ## React 性能优化思路
 针对以上描述，react函数组件的性能优化主要方向有两个：
 
-1. 减少重新 render 的次数（减少diff）。因为在 React 里最重(花时间最长)的一块就是 reconction(简单的可以理解为 diff)，如果不 render，就不会 reconction。官方管有reconction: https://reactjs.org/docs/reconciliation.html
+1. 减少重新 render 的次数（减少diff）。因为在 React 里最重(花时间最长)的一块就是 reconction(简单的可以理解为 diff)，如果不 render，就不会 reconction。官方管有reconction: https://zh-hans.reactjs.org/docs/reconciliation.html
 2. 避免重复计算。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。
