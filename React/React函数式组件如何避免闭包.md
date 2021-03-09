@@ -5,4 +5,4 @@
 Hooks 严重依赖于 JS 闭包,但是闭包有时很棘手。
 
 1. 正确管理hook依赖关系解决hook闭包的关键，推荐安装 eslint-plugin-react-hooks,它可以帮助咱们检测被遗忘的依赖项
-2. 自定义state的参数改为方法，比如：把`setStateValue('Hello World')` 改为 `setStateValue(() => 'Hello World')`
+2. useState定义的setState方法，在使用时把参数值改为方法，比如：把`setStateValue('Hello World')` 改为 `setStateValue(() => 'Hello World')`
