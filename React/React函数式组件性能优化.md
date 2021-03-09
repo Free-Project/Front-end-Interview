@@ -9,3 +9,15 @@ react hooks的出现使得函数组件拥有类组件的能力，且函数组件
 
 1. 减少重新 render 的次数（减少diff）。因为在 React 里最重(花时间最长)的一块就是 reconction(简单的可以理解为 diff)，如果不 render，就不会 reconction。官方管有reconction: https://zh-hans.reactjs.org/docs/reconciliation.html
 2. 避免重复计算。主要是减少重复计算，对于函数式组件来说，每次 render 都会重新从头开始执行函数调用。
+
+**实现方法**：  
+1. React.memo 
+高阶组件,但只适用于函数组件，而不适用 class 组件。React.memo 仅检查 props 变更。
+默认情况下其只会对复杂对象做浅层对比，如果想控制对比过程，需将自定义的比较函数通过第二个参数传入来实现。
+通过 React.memo 包裹的组件在 props 不变的情况下，这个被包裹的组件是不会重新渲染的，会直接复用最近一次渲染的结果。
+
+2. useCallback 
+接受一个内联回调函数参数和一个依赖项数组，useCallback会返回该回调函数的memoized版本。这个回调函数仅仅会在某个依赖改变时才会更新。
+
+3. useMemo 
+把创建函数和依赖项数组作为参数传入useMemo，他仅会在某个依赖项改变时蔡崇信计算memoized的值。用来做值的缓存会比较更加合适。
