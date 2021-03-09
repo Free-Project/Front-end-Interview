@@ -18,6 +18,7 @@ const memoizedCallback = useCallback(() => {
   doSomething(a, b);
 }, [a, b]);
 ```
+
 2. useMemo Hook 使得控制具体子节点何时更新变得更容易，减少了对纯组件的需要。
 3. 最后，useReducer Hook 减少了对深层传递回调的依赖，正如下面解释的那样。
 
