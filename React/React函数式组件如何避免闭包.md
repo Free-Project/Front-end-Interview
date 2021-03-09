@@ -5,8 +5,7 @@
 Hooks 严重依赖于 JS 闭包,但是闭包有时很棘手。
 
 1. 正确管理hook依赖关系解决hook闭包的关键，推荐安装 eslint-plugin-react-hooks,它可以帮助咱们检测被遗忘的依赖项
-2. 通过函数方法来更新`state`状态
-示例：
+2. 通过函数方法来更新`state`状态，示例如下：
 ```
 function DelayedCount() {
   const [count, setCount] = useState(0);
