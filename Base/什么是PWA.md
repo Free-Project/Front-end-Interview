@@ -19,7 +19,8 @@ web网页缺点：
 
 ## PWA
 
-`PWA（Progressive Web App，即渐进式WEB应用）`是一种理念，使用多种技术来增强web app的功能，可以让网站的体验变得更好，能够模拟一些Native app功能，比如通知推送等。在移动端利用标准化框架，让网页应用呈现和Native app相似的体验。
+`PWA（Progressive Web App，即渐进式WEB应用）`是一种理念，使用多种技术来增强web app的功能，可以让网站的体验变得更好，能够模拟一些Native app功能，比如通知推送等。在移动端利用标准化框架，让网页应用呈现和Native app相似的体验。  
+
 官网 https://web.dev/progressive-web-apps/  
 更多参考 https://developer.mozilla.org/zh-CN/docs/Web/Progressive_web_apps  
 
