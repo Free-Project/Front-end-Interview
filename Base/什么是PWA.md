@@ -57,7 +57,7 @@ Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List �
 ​ 可以设置你添加屏幕上的应用程序图标、名字、图标大小
 
 示例：  
-// index.html
+index.html
 ```
 <head>
   <title>Minimal PWA</title>
@@ -67,7 +67,7 @@ Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List �
   <link rel="icon" href="/e.png" type="image/png" />
 </head>
 ```
-// manifest.json
+manifest.json
 ```
 {
   "name": "Minimal PWA", // 必填 显示的插件名称
