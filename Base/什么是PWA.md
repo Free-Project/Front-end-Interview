@@ -94,3 +94,22 @@ manifest.json
 }
 ```
 > Manifest参考文档：https://developer.mozilla.org/zh-CN/docs/Web/Manifest
+
+
+### Service Worker
+通过 Service workers 让 PWA 离线工作
+
+Service Worker 是 Chrome 团队提出和力推的一个 WEB API，用于给 web 应用提供高级的可持续的后台处理能力。  
+
+Service Workers 就像介于服务器和网页之间的拦截器，能够拦截进出的HTTP 请求，从而完全控制你的网站。  
+
+最主要的特点
+
+- 在页面中注册并安装成功后，运行于浏览器后台，不受页面刷新的影响，可以监听和截拦作用域范围内所有页面的 HTTP 请求。
+- 网站必须使用 HTTPS。除了使用本地开发环境调试时(如域名使用 localhost)
+- 运行于浏览器后台，可以控制打开的作用域范围下所有的页面请求
+- 单独的作用域范围，单独的运行环境和执行线程
+- 不能操作页面 DOM。但可以通过事件机制来处理
+- 事件驱动型服务线程
+
+为什么要求网站必须是HTTPS的，大概是因为service worker权限太大能拦截所有页面的请求吧，如果http的网站安装service worker很容易被攻击
