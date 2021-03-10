@@ -41,6 +41,12 @@ PWA关键结构
 2. Service Worker （可以理解为服务工厂）
 3. Push Notification（推送通知）
 
+**基本文件：**  
+- index.html
+- main.css
+- manifest.json
+- service-worker.js
+
 ### Manifest
 Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List 。Manifest 在 PWA 中的作用有：
 
@@ -51,17 +57,6 @@ Web App Manifest 是一个 W3C 规范，它定义了一个基于 JSON 的 List �
 - 可以设置你的应用启动是从主屏幕启动还是从 URL 启动
 - 可以设置你添加屏幕上的应用程序图标、名字、图标大小
 
-示例：  
-index.html
-```
-<head>
-  <title>Minimal PWA</title>
-  <meta name="viewport" content="width=device-width, user-scalable=no" />
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" type="text/css" href="main.css">
-  <link rel="icon" href="/e.png" type="image/png" />
-</head>
-```
 manifest.json
 ```
 {
@@ -112,4 +107,13 @@ Service Workers 就像介于服务器和网页之间的拦截器，能够拦截�
 - 不能操作页面 DOM。但可以通过事件机制来处理
 - 事件驱动型服务线程
 
-为什么要求网站必须是HTTPS的，大概是因为service worker权限太大能拦截所有页面的请求吧，如果http的网站安装service worker很容易被攻击
+为什么要求网站必须是HTTPS的，大概是因为service worker权限太大能拦截所有页面的请求吧，如果http的网站安装service worker很容易被攻击。
+
+### Push Notification
+通过通知推送让 PWA 可重用
+
+我们可以利用消息和通知推送来自动重启应用并随时提供新的内容。
+
+推送 API和 通知 API是两个相互独立的API，但当你的应用想实现一些有趣实用的功能时他们可以配合得很好。推送API可以实现从服务端推送新的内容而不需要客户端发起请求，它是由应用的service worker来实现的。通知功能则可以通过service worker来向用户展示一些新的信息，或者至少提醒用户应用已经更新了某些功能。
+
+这些工作是在浏览器外部实现的，跟service worker一样，所以即使应用被隐藏到后台甚至应用已经被关闭了，我们仍然能够推送更新或者推送通知给用户。
