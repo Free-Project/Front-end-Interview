@@ -35,10 +35,19 @@ git commit --amend -m [message]
 ```
 
 ### 6、如何合并某一次 commit 的修改？
+`git cherry-pick`：能够把另一个分支的一个或多个提交复制到当前分支。
 
 ```bash
 git cherry-pick [commit]
 ```
+具体使用如下：  
+
+1. 首先git checkout 到另一个分支，然后使用git log找到想要复制的commit 的id,记录下来。
+2. 切换到自己分支，使用git cherry-pick  [上面记录的commit id]  回车即可!
+
+如果想要复制多个, 使用`git cherry-pick commitid1 commitid2 ... commitid100`。它们必须按照时间顺序放置，否则命令将失败，但不会报错，commitid1为最早提交(不包括)，commitid100为最新提交(包括)。  
+如果想要包括commitid1,那么在commitid1后加^即可，即 git cherry-pick commitid1^ commitid2 ... commitid100
+
 > git cherry-pick 参考： http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
 
 ### 7、如何清除未跟踪的文件？
