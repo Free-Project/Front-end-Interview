@@ -39,6 +39,7 @@ git commit --amend -m [message]
 ```bash
 git cherry-pick [commit]
 ```
+> 参考： http://www.ruanyifeng.com/blog/2020/04/git-cherry-pick.html
 
 ### 7、如何清除未跟踪的文件？
 
