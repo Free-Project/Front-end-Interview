@@ -10,7 +10,7 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 ```
 
 
-### 示例场景1：   
+### git rebase branchA branchB
 
 有一条代码线`master`分支，同时有新开发线`dev`分支从`master`的B提交点分离出来。之后，master分支也有代码提交（C,D）。如下图：
 
@@ -34,9 +34,9 @@ A---B---C---D  (master主干)
 > 如上例中`git rebase master dev`命令，`dev` 可不写，即 `git rebase master`
 
 
-### 示例场景2：  
+### git rebase --onto
 
-两条新功能开发线，一条`dev`，`dev1`是在`dev`的基础上开的新分支，可能`dev1`的代码更稳定，此时需要将`dev1`改为`master`的一条分支，同时将`master`线上修改的代码与`dev1`进行合并。
+如果要在合并两分支时需要跳过某一分支的提交，这时就可以使用--onto参数了。比如，假设当前本地仓库提交历史如下：
 ```
                 H---I---J  (dev1分支)
                /
@@ -44,6 +44,7 @@ A---B---C---D  (master主干)
      /
 A---B---C---D  (master主干)
 ```
+此时`dev1`分支的上游分支是`dev`分支，如果要把`dev1`分支上的提交(H,I,J)跳过`dev`分支，直接放到master分支上，就需要加上--onto参数：
 
 此时，可以执行命令：`git rebase --onto master dev dev1`，操作成功后，`dev1`线将有`master`上的最新代码，同时又包含新开发的功能：
 ```
