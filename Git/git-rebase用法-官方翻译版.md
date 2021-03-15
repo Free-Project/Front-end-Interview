@@ -47,35 +47,42 @@ D---E---F---G  master
 ```
 注意：`git rebase master topic` 只是 `git checkout topic `然后 `git rebase master`的缩写。 当退出rebase时，topic将保留为已签出分支。  
 
-如果上游分支已经包含您所做的更改（例如，因为您发送了一个应用于上游的修补程序），那么将跳过该提交。 例如，根据以下历史记录运行`git rebase master`（其中A'和A引入了相同的更改集，但是提交者信息不同）：
+如果`上游分支（即master）`已经包含您所做的更改，那么将跳过该提交。 例如，根据以下历史记录运行`git rebase master`（其中A'和A都提交了相同的更改，但是提交者信息不同）：
+```
+      A---B---C  topic
+     /
+D---E---A'---F  master
+```
+结果:
+```
+               B'---C'  topic
+              /
+D---E---A'---F  master
+```
 
-          A---B---C topic
-         /
-    D---E---A'---F master
-will result in:
+下面是如何将一个基于一个分支的“topic”分支移植到另一个分支，以假装使用`rebase--onto`从后一个分支派生出“topic”分支。
 
-                   B'---C' topic
-                  /
-    D---E---A'---F master
-Here is how you would transplant a topic branch based on one branch to another, to pretend that you forked the topic branch from the latter branch, using rebase --onto.
-
-First let’s assume your topic is based on branch next. For example, a feature developed in topic depends on some functionality which is found in next.
-
-    o---o---o---o---o  master
-         \
-          o---o---o---o---o  next
-                           \
-                            o---o---o  topic
-We want to make topic forked from branch master; for example, because the functionality on which topic depends was merged into the more stable master branch. We want our tree to look like this:
-
-    o---o---o---o---o  master
-        |            \
-        |             o'--o'--o'  topic
-         \
-          o---o---o---o---o  next
-We can get this using the following command:
-
+首先，假设您的“topic”基于分支“next”。例如，“topic”的某些功能取决于“next”中的某些功能。
+```
+o---o---o---o---o  master
+     \
+      o---o---o---o---o  next
+                       \
+                        o---o---o  topic
+```
+我们希望使“topic”是从分支“master”分叉出来；例如，想把“topic”所拥有的代码合并到“master”分支中。看起来像这样：
+```
+o---o---o---o---o  master
+     \           \
+      \            o'--o'--o'  topic
+       \
+        o---o---o---o---o  next
+```
+可以使用下面的命令:
+```
 git rebase --onto master next topic
+```
+
 Another example of --onto option is to rebase part of a branch. If we have the following situation:
 
                             H---I---J topicB
