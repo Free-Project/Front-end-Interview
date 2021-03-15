@@ -12,7 +12,7 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 
 **示例场景1**：   
 
-有一条代码线`master`线，同时有条新需求开发线`dev`线。`master`线从B开出分支dev线后，一直在做bug修复（C,D）。如下图：
+有一条代码线`master`分支，同时有新开发线`dev`分支从`master`的B提交点分离出来。之后，master分支也有代码提交（C,D）。如下图：
 
 ```
       E---F---G  (dev分支)
@@ -20,16 +20,16 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 A---B---C---D  (master主干)
 ```
 
-此时，`dev`线需要合并`master`线修复的bug，以免重复开发。那我们可以用到`git rebase`命令。
+此时（**当前在dev分支**），`dev`线需要合并`master`分支的代码，那我们可以用到`git rebase`命令。
 
-执行：`git rebase --onto master dev`，成功后，dev线就会合并C和D提交的记录。如下图：
+执行：`git rebase master` 或 `git rebase master dev`，成功后，dev线就会合并C和D提交的记录。如下图：
 
 ```
               E---F---G  (dev分支)
              /
 A---B---C---D  (master主干)
 ```
-
+**解释：`git rebase branchA branchB`：首先会取出branchB，将branchB中的提交放在branchA的顶端，一般branchB为当前分支，可以不指定。**  
 
 
 **示例场景2**：  
