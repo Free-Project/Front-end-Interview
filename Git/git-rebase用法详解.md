@@ -24,7 +24,7 @@ A---B---C---D  (master主干)
 执行：git rebase --onto master dev，成功后，dev线就会合并C和D提交的记录。如下图：
 
 ```
-              E---F---G  (dev分支
+              E---F---G  (dev分支)
              /
 A---B---C---D  (master主干)
 ```
