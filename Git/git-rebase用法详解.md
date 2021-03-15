@@ -55,9 +55,9 @@ A---B---C---D  (master主干)
              \
                H---I---J  (dev1分支)
 ```
-> **解释 `git rebase --onto A B C`**
-> A : 是一个分支名称（代表此分支的 HEAD）或者是一个 commit_id (此 id 不在 C 上)
-> B : 一个分支名称（此分支与 C 有共同的祖先 commit）或者是一个 commit_id (此 id 在 C 上)
+> **解释 `git rebase --onto A B C`**  
+> A : 是一个分支名称（代表此分支的 HEAD）或者是一个 commit_id (此 id 不在 C 上)  
+> B : 一个分支名称（此分支与 C 有共同的祖先 commit）或者是一个 commit_id (此 id 在 C 上)  
 > C : 一个分支名称
 
 
