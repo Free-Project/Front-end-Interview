@@ -69,6 +69,9 @@ A---D---E  (dev1分支)
 
 
 ## `git rebase`命令主要参数解析：
+```
+git rebase [-i | --interactive] [<options>] [--exec <cmd>] [--onto <newbase>] [<upstream> [<branch>]]
+```
 
 ```
 --onto<newbase>:
