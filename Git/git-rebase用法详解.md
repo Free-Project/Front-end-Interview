@@ -12,7 +12,7 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 
 **示例场景1**：   
 
-有一条代码线master线，同时有条新需求开发线dev线。master线从B开出分支dev线后，一直在做bug修复（C,D）。如下图：
+有一条代码线`master`线，同时有条新需求开发线`dev`线。`master`线从B开出分支dev线后，一直在做bug修复（C,D）。如下图：
 
 ```
       E---F---G  (dev分支)
@@ -20,9 +20,9 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 A---B---C---D  (master主干)
 ```
 
-此时，dev线需要合并master线修复的bug，以免重复开发。那我们可以用到git rebase命令。
+此时，`dev`线需要合并`master`线修复的bug，以免重复开发。那我们可以用到`git rebase`命令。
 
-执行：git rebase --onto master dev，成功后，dev线就会合并C和D提交的记录。如下图：
+执行：`git rebase --onto master dev`，成功后，dev线就会合并C和D提交的记录。如下图：
 
 ```
               E---F---G  (dev分支)
@@ -34,7 +34,7 @@ A---B---C---D  (master主干)
 
 **示例场景2**：  
 
-两条新功能开发线，一条dev，dev1是在dev的基础上开的新分支，可能dev1的代码更稳定，此时需要将dev1改为master的一条分支，同时将master线上修改的代码与dev1进行合并。
+两条新功能开发线，一条`dev`，`dev1`是在`dev`的基础上开的新分支，可能`dev1`的代码更稳定，此时需要将`dev1`改为`master`的一条分支，同时将`master`线上修改的代码与`dev1`进行合并。
 ```
                 H---I---J  (dev1分支)
                /
@@ -43,7 +43,7 @@ A---B---C---D  (master主干)
 A---B---C---D  (master主干)
 ```
 
-此时，可以执行命令：git rebase --onto master dev dev1，操作成功后，dev1线将有master上的最新代码，同时又包含新开发的功能：
+此时，可以执行命令：`git rebase --onto master dev dev1`，操作成功后，`dev1`线将有`master`上的最新代码，同时又包含新开发的功能：
 ```
 
       E---F---G  (dev分支)
@@ -57,7 +57,7 @@ A---B---C---D  (master主干)
 
 **示例场景3**：  
 
-假设现在有一条分支dev1如下：
+假设现在有一条分支`dev1`如下：
 ```
 A---B---C---D---E  (dev1分支)
 ```
