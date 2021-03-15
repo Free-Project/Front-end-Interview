@@ -10,7 +10,7 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 ```
 
 
-**示例场景1**：   
+### 示例场景1：   
 
 有一条代码线`master`分支，同时有新开发线`dev`分支从`master`的B提交点分离出来。之后，master分支也有代码提交（C,D）。如下图：
 
@@ -32,7 +32,7 @@ A---B---C---D  (master主干)
 **解释：`git rebase branchA branchB`：首先会取出branchB，将branchB中的提交放在branchA的顶端，一般branchB为当前分支，可以不指定。**  
 
 
-**示例场景2**：  
+### 示例场景2：  
 
 两条新功能开发线，一条`dev`，`dev1`是在`dev`的基础上开的新分支，可能`dev1`的代码更稳定，此时需要将`dev1`改为`master`的一条分支，同时将`master`线上修改的代码与`dev1`进行合并。
 ```
@@ -55,7 +55,7 @@ A---B---C---D  (master主干)
 
 
 
-**示例场景3**：  
+### 示例场景3：  
 
 假设现在有一条分支`dev1`如下：
 ```
