@@ -1,46 +1,53 @@
 # git-rebase用法-官方翻译版
 
-> https://git-scm.com/docs/git-rebase
+> 官方地址：https://git-scm.com/docs/git-rebase
 
-NAME
+### 名称
 git-rebase - Reapply commits on top of another base tip
 
-SYNOPSIS
+### 大纲
+```
 git rebase [-i | --interactive] [<options>] [--exec <cmd>]
 	[--onto <newbase> | --keep-base] [<upstream> [<branch>]]
 git rebase [-i | --interactive] [<options>] [--exec <cmd>] [--onto <newbase>]
 	--root [<branch>]
 git rebase (--continue | --skip | --abort | --quit | --edit-todo | --show-current-patch)
-DESCRIPTION
-If <branch> is specified, git rebase will perform an automatic git switch <branch> before doing anything else. Otherwise it remains on the current branch.
+```
 
-If <upstream> is not specified, the upstream configured in branch.<name>.remote and branch.<name>.merge options will be used (see git-config[1] for details) and the --fork-point option is assumed. If you are currently not on any branch or if the current branch does not have a configured upstream, the rebase will abort.
+### 描述
 
-All changes made by commits in the current branch but that are not in <upstream> are saved to a temporary area. This is the same set of commits that would be shown by git log <upstream>..HEAD; or by git log 'fork_point'..HEAD, if --fork-point is active (see the description on --fork-point below); or by git log HEAD, if the --root option is specified.
+如果指定了<branch>，git rebase将在执行其他操作之前执行自动git switch <branch>。 否则，它将保留在当前分支上。
 
-The current branch is reset to <upstream>, or <newbase> if the --onto option was supplied. This has the exact same effect as git reset --hard <upstream> (or <newbase>). ORIG_HEAD is set to point at the tip of the branch before the reset.
+如果未指定<upstream>，则将使用在branch。<name> .remote和branch。<name> .merge选项中配置的上游（有关详细信息，请参见git-config [1]）和--fork-point选项 假设。 如果您当前不在任何分支上，或者当前分支上没有配置上游，则重新定位将中止。
 
-The commits that were previously saved into the temporary area are then reapplied to the current branch, one by one, in order. Note that any commits in HEAD which introduce the same textual changes as a commit in HEAD..<upstream> are omitted (i.e., a patch already accepted upstream with a different commit message or timestamp will be skipped).
+当前分支中的所有提交但未在<upstream>中的提交所做的所有更改都保存到一个临时区域。 这与`git log <upstream> .. HEAD`;将显示的提交集相同。 或通过`git log'fork_point'.. HEAD`，如果`--fork-point`是活动的（请参见下面有关`--fork-point`的描述）； 或通过`git log HEAD`（如果指定了`--root`选项）。
 
-It is possible that a merge failure will prevent this process from being completely automatic. You will have to resolve any such merge failure and run git rebase --continue. Another option is to bypass the commit that caused the merge failure with git rebase --skip. To check out the original <branch> and remove the .git/rebase-apply working files, use the command git rebase --abort instead.
+如果提供了--onto选项，则将当前分支重置为<上游>或<newbase>。 这与git reset --hard <upstream>（或<newbase>）具有完全相同的效果。 将ORIG_HEAD设置为指向重置之前分支的尖端。
 
-Assume the following history exists and the current branch is "topic":
+然后，将先前保存到临时区域中的提交依次重新应用于当前分支。 请注意，在HEAD中引入的文本更改与在HEAD .. <upstream>中的提交相同的文本更改的所有提交都将被忽略（即，将跳过上游已接受的具有不同提交消息或时间戳的补丁程序）。
 
-          A---B---C topic
-         /
-    D---E---F---G master
-From this point, the result of either of the following commands:
+合并失败可能会阻止此过程完全自动化。 您将必须解决任何此类合并失败并运行git rebase --continue。 另一个选择是使用git rebase --skip绕过导致合并失败的提交。 要检出原始的<branch>并删除.git / rebase-apply工作文件，请改用git rebase --abort命令。
 
+假设存在以下历史记录，且当前分支为“topic”：
+```
+      A---B---C  topic
+     /
+D---E---F---G  master
+```
+执行下列任一命令：
+```
 git rebase master
 git rebase master topic
-would be:
+```
+结果:
+```
+              A'--B'--C'  topic
+             /
+D---E---F---G  master
+```
+注意：`git rebase master topic` 只是 `git checkout topic `然后 `git rebase master`的缩写。 当退出rebase时，topic将保留为已签出分支。  
 
-                  A'--B'--C' topic
-                 /
-    D---E---F---G master
-NOTE: The latter form is just a short-hand of git checkout topic followed by git rebase master. When rebase exits topic will remain the checked-out branch.
-
-If the upstream branch already contains a change you have made (e.g., because you mailed a patch which was applied upstream), then that commit will be skipped. For example, running git rebase master on the following history (in which A' and A introduce the same set of changes, but have different committer information):
+如果上游分支已经包含您所做的更改（例如，因为您发送了一个应用于上游的修补程序），那么将跳过该提交。 例如，根据以下历史记录运行`git rebase master`（其中A'和A引入了相同的更改集，但是提交者信息不同）：
 
           A---B---C topic
          /
