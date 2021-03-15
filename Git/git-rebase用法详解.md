@@ -71,34 +71,45 @@ A---D---E  (dev1分支)
 ```
 --onto<newbase>:
 ```
-
 newbase指的是需要rebase代码的起点，newbase可以是分支（branch），也可以是任意的提交记录(commit1)。rebase成功后，将以newbase为代码分支起点。
 
-<upstream>:
 
+```
+<upstream>:
+```
 需要与newbase比对的分支或提交记录。
+
+
 ```
 <branch>：
 ```
-
 需要rebase的工作分支。默认为HEAD，例如dev1
+
+
 ```
 --continue
 ```
-
 当处理完冲突后，可以使用该命令让rebase继续。
+
+
 ```
 --abort
 ```
 终止rebase操作，将HEAD设置为rebase之前的分支。如果指定了<branch>，则HEAD将重置为<branch>。否则，HEAD将被重置为rebase之前的分支。
+      
+      
 ```
 --quit
 ```
 终止rebase操作，但不会将HEAD重置为原来的分支。index和working tree将不会发生任何改变。
+
+
 ```
 --autostash
 ```
 在rebase操作之前自动stash当前分支未提交的代码，在rebase操作结束后，自动将stash的记录进行unstash，并与rebase后的代码合并。注意，此操作有可能会导致严重的冲突（conflict），谨慎使用。
+
+
 ```
 -m
 
