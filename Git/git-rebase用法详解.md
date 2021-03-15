@@ -9,6 +9,7 @@ git rebase [-i | --interactive] [<options>] [--exec <cmd>] [--onto <newbase>] --
 git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current-patch
 ```
 
+
 **示例场景1**：   
 
 有一条代码线master线，同时有条新需求开发线dev线。master线从B开出分支dev线后，一直在做bug修复（C,D）。如下图：
@@ -28,6 +29,7 @@ A---B---C---D  (master主干)
              /
 A---B---C---D  (master主干)
 ```
+
 
 
 **示例场景2**：  
