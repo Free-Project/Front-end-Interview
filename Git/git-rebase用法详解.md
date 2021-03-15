@@ -29,7 +29,8 @@ A---B---C---D  (master主干)
              /
 A---B---C---D  (master主干)
 ```
-> 解释：`git rebase branchA branchB`：首先会取出branchB，将branchB中的提交放在branchA的顶端，一般branchB为当前分支，可以不指定。  
+> **解释**：
+> `git rebase branchA branchB`：首先会取出branchB，将branchB中的提交放在branchA的尾端（最新commit点的后面），一般branchB为当前分支，可以不指定。  
 > 如上例中`git rebase master dev` 或 `git rebase master`
 
 
