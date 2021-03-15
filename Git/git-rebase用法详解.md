@@ -33,11 +33,23 @@ A---B---C---D  master主干
 **示例场景2**：  
 
 两条新功能开发线，一条dev，dev1是在dev的基础上开的新分支，可能dev1的代码更稳定，此时需要将dev1改为master的一条分支，同时将master线上修改的代码与dev1进行合并。
-
-
+```
+                H---I---J dev1分支
+               /
+      E---F---G  dev分支
+     /
+A---B---C---D  master主干
+```
 
 此时，可以执行命令：git rebase --onto master dev dev1，操作成功后，dev1线将有master上的最新代码，同时又包含新开发的功能：
+```
 
+      E---F---G  dev分支
+     /
+A---B---C---D  master主干
+             \
+               H---I---J dev1分支
+```
 
 
 
