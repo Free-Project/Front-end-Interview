@@ -21,7 +21,8 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 
 
 
-**场景2**：  
+
+**示例场景2**：  
 
 两条新功能开发线，一条dev，dev1是在dev的基础上开的新分支，可能dev1的代码更稳定，此时需要将dev1改为master的一条分支，同时将master线上修改的代码与dev1进行合并。
 
@@ -31,7 +32,8 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 
 
 
-**场景3**：  
+
+**示例场景3**：  
 
 假设现在有一条分支dev1，发现B和C提交的代码有问题，需要把B和C提交的代码去除，那可以执行命令：
 ```
