@@ -86,13 +86,13 @@ A---D---E  (dev1分支)
 git rebase [-i | --interactive] [<options>] [--exec <cmd>] [--onto <newbase>] [<upstream> [<branch>]]
 ```
 
-`--onto<newbase>`  
+`--onto <newbase>`  
 newbase指的是需要rebase代码的起点，newbase可以是分支（branch），也可以是任意的提交记录(commitId)。rebase成功后，将以newbase为代码分支起点。
   
 
 
 `<upstream>`  
-需要与newbase比对的分支或提交记录。
+需要与newbase比对的分支或提交记录，例如dev。
 
 
 
