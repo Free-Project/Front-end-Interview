@@ -13,13 +13,21 @@ git rebase --continue | --skip | --abort | --quit | --edit-todo | --show-current
 
 有一条代码线master线，同时有条新需求开发线dev线。master线从B开出分支dev线后，一直在做bug修复（C,D）。如下图：
 
-
+```
+          E---F---G  dev分支
+         /
+    A---B---C---D  master主干
+```
 
 此时，dev线需要合并master线修复的bug，以免重复开发。那我们可以用到git rebase命令。
 
 执行：git rebase --onto master dev，成功后，dev线就会合并C和D提交的记录。如下图：
 
-
+```
+                  E'--F'--G'  dev分支
+                 /
+    A---B---C---D  master主干
+```
 
 
 **示例场景2**：  
