@@ -1,5 +1,7 @@
 # git rebase用法详解
 
+git rebase，字面意思，就是重新定义（re）起点（base）、移植节点的作用。
+
 ## 命令：
 ```
 git rebase [-i | --interactive] [<options>] [--exec <cmd>] [--onto <newbase>] [<upstream> [<branch>]]
