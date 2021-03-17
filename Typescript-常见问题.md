@@ -5,6 +5,14 @@ TypeScript 中的 void 是 undefined 的子类型
 ## 什么是 never 类型？
 never 表示一个不包含值的类型，即表示永远不存在的值。
 
+## never 和 void 的区别
+void 表示没有任何类型（可以被赋值为 null 和 undefined）。
+
+never 表示一个不包含值的类型，即表示永远不存在的值。
+
+拥有 void 返回值类型的函数能正常运行。
+拥有 never 返回值类型的函数无法正常返回，无法终止，或会抛出异常。
+
 ## 下面代码会不会报错？怎么解决？
 const obj = {
     a: 1,
