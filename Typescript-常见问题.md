@@ -3,6 +3,7 @@
 TypeScript 中的 void 是 undefined 的子类型
 
 ## 什么是 never 类型？
+never 表示一个不包含值的类型，即表示永远不存在的值。
 
 ## 下面代码会不会报错？怎么解决？
 const obj = {
@@ -13,6 +14,7 @@ const obj = {
 obj.c = null;
 
 ## readonly 和 const 有什么区别？
+readonly是ts只读类型，const是定义常量
 
 ## 下面代码中，foo 的类型应该如何声明
 function foo (a: number) {
