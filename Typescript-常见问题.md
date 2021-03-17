@@ -77,6 +77,7 @@ myfn(Foo);
 ## 什么是 class mixin, 如何实现？
 
 ## typeof 关键词有什么用？
+ypeof操作符可以用来获取一个变量或对象的类型。
 
 ## keyof 关键词有什么用？
 
