@@ -219,9 +219,9 @@ type Parameters<T extends (...args:any) => any> = T extends (...args: infer P) =
 用法示例:
 ```
 interface Ifn {
-   (name: string,age: number): void
+   (name: string, age: number): void
 }
-type getParamsType = TParameters<typeof fn> //返回的是元组：[string, number]
+type getParamsType = Parameters<typeof fn> // 返回的是元组：[string, number]
 ```
  
 
