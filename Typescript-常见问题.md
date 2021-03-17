@@ -1,6 +1,12 @@
 
 ## void 和 undefined 有什么区别？
-TypeScript 中的 void 是 undefined 的子类型
+TypeScript中void类型是any类型的子类型，是null和undefined类型的父类型。  
+
+void类型的变量值是有限制的，只能是undefined和null。如：
+```
+let a: void = null;
+let b: void = undefined;
+```
 
 ## 什么是 never 类型？
 never 表示一个不包含值的类型，即表示永远不存在的值。
