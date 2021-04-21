@@ -143,6 +143,7 @@ function isDate(date: any): date is Date {
 ## tsconfig.json 里 --strictNullChecks 参数的作用是什么？
 
 ## interface 和 type 声明有什么区别？
+参考 https://github.com/kothing/Front-end-Interview/blob/main/TypeScript%E4%B8%ADinterface%E5%92%8Ctype%E7%9A%84%E5%8C%BA%E5%88%AB.md
 
 ## 如何完善 Calculator 的声明。
 ```
