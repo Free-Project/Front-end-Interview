@@ -136,5 +136,5 @@ User 接口为 {
 }
 */
 ```
-## 复制代码总结
+## 总结
 一般来说，如果不清楚什么时候用interface/type，能用 interface 实现，就用 interface , 如果不能就用 type 。其他更多详情参看 官方规范文档
