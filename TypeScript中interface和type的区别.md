@@ -83,14 +83,14 @@ type User = Name & {
 // 基本类型别名
 type Name = string
 
-// 联合类型
+// 先定义两个interface接口
 interface Dog {
     wong();
 }
 interface Cat {
     miao();
 }
-
+// 联合类型 (联合上面两个接口)
 type Pet = Dog | Cat
 
 // 具体定义数组每个位置的类型
