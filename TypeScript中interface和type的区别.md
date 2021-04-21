@@ -128,13 +128,13 @@ interface User {
   sex: string
 }
 
-/*
-User 接口为 {
+
+// 相同接口名会合并类型，最终为：
+User {
   name: string
   age: number
   sex: string 
 }
-*/
 ```
 ## 总结
 一般来说，如果不清楚什么时候用interface/type，能用 interface 实现，就用 interface , 如果不能就用 type 。其他更多详情参看 官方规范文档
