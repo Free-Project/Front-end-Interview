@@ -33,6 +33,7 @@ let reqUser: Required<User> = {
     id: 1
 }
 ```
+[Playground Link](https://www.typescriptlang.org/zh/play?#code/FAFwngDgpgBAqgZygJxgXhgb2DXMB2AhgLZQD8AXDAiMgJb4DmOeEhCCA7gPbIAmlarQbM8MOgKr4ArsQBGKYAF9gwADZQQMZFACOiFFQBKe6XR18APAeQA+dFha4ipKgCIAKt2JuANE5g2Dh5+dwBGACYAZgAWAFYANj8AiSow5VVcIA)
 
 ## 二、`Partial<T>`：将所有类型转为可选类型
 源码实现：把问号加上
