@@ -37,7 +37,7 @@ interface 和 type 都可以拓展，并且两者并不是相互独立的，也�
 
 interface 继承使用关键字 `extends`  
 ```
-// interface extends interface
+// interface 继承 interface
 interface Name { 
   name: string; 
 }
@@ -45,7 +45,7 @@ interface User extends Name {
   age: number; 
 }
 
-// interface extends type
+// interface 继承 type
 type Name = { 
   name: string; 
 }
@@ -56,14 +56,14 @@ interface User extends Name {
 
 type 继承使用符号`&`  
 ```
-// type extends type
+// type 继承 type
 type Name = { 
   name: string; 
 }
 type User = Name & { age: number  };
 
 
-// type extends interface
+// type 继承 interface
 interface Name { 
   name: string; 
 }
