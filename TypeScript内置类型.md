@@ -52,7 +52,7 @@ type User = {
 }
 let user: Partial<User> = {} ;//属性类型为可选，所以不写也不会报错
 ```
- 
+
 
 ## 三、`Readony`： 将所有属性类型转为只读属性选项类型
 源码实现: 在属性key 前面加readonly 关键词
@@ -73,7 +73,7 @@ let readOnlyUser: Readonly<User> = {
 }
 readOnlyUser.name = "mike" ;//报错，无法赋值，只读属性，只能初始化赋值
 ```
- 
+[Playground Link](https://www.typescriptlang.org/zh/play?ssl=7&ssc=19&pln=7&pc=23#code/FAFwngDgpgBAqgZygJxgXhgb2DXMB2AhgLZQBcMCIyAlvgOY54SEIIDuA9sgCYVW0GTXDT4EArsQBGKYAF9gAGyggY4pMgoAFQshA1CigDyIUAPnRY5MANwB6O4D0dQOQGgbx9A0eqAuOUD3yoEgEwDD-gAJGgKdygLBygJmKgPpyoYBY8oClRoCYqcBMQA)
 
 ## 四、`Pick`：从 T 中筛选出 K (大类型中挑选小类型)
 源码实现：
